@@ -1,0 +1,17 @@
+.tableRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.tableWrapper{
+    border: 1px solid #cccccc;
+}
+
+.tableHeader{
+    background: #dddddd;
+}
+
+.tableCell{
+    padding: 10px 15px;
+}
