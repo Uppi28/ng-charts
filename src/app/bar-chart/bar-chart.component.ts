@@ -8,24 +8,25 @@ import * as d3 from 'd3'
 })
 export class BarChartComponent implements OnInit {
 
-  @Input('barChartData') dataset: Array<{}>
-  @Input() barColor: string
+  @Input('barChartData') dataset: Array<{}>;
+  @Input() barColor: string;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
+  @Input() selectorDiv: string;
 
   constructor() { }
 
   ngOnInit() {
     var margin = { top: 40, right: 30, bottom: 30, left: 50 },
-      width = 460 - margin.left - margin.right,
-      height = 320 - margin.top - margin.bottom;
+      width = document.getElementById(this.selectorDiv).clientWidth - margin.left - margin.right,
+      height = document.getElementById(this.selectorDiv).clientHeight - margin.top - margin.bottom;
 
-    var greyColor = "#898989";
     var barColor = this.barColor;
-    // var highlightColor = d3.interpolateInferno(0.3);   
 
     var formatPercent = d3.format(".0%");
 
-    var svg = d3.select("body").append("svg")
-      .attr("width", width + margin.left + margin.right)
+    var svg = d3.select("#barChart").append("svg")
+      .attr("width", width)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -44,18 +45,32 @@ export class BarChartComponent implements OnInit {
     x.domain(dataset.map(d => {
       var key = Object.keys(d)[0];
       return d[key]
-        // return Object.keys(d); 
     }));
-    // y.domain([0, d3.max(dataset,  d => { return d.value; })]);
+
     y.domain([0, 1]);
 
     svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+      .append("text")
+      .attr("x", (width))
+      .attr("y", "-10px")
+      .attr("dx", "1em")
+      .style("text-anchor", "end")
+      .style("fill", "gray")
+      .text(this.xAxisLabel);
+
     svg.append("g")
       .attr("class", "y axis")
-      .call(yAxis);
+      .call(yAxis)
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .style("fill", "gray")
+      .text(this.yAxisLabel);
 
     svg.selectAll(".bar")
       .data(dataset)
@@ -63,7 +78,8 @@ export class BarChartComponent implements OnInit {
       .attr("class", "bar")
       .style("display", d => { return d.value === null ? "none" : null; })
       .style("fill", barColor)
-      .attr("x", d => { return x(d.year); })
+      .attr("x", d => { 
+        return x(d.year); })
       .attr("width", x.bandwidth())
       .attr("y", d => { return height; })
       .attr("height", 0)
@@ -91,6 +107,13 @@ export class BarChartComponent implements OnInit {
       .text(d => { return formatPercent(d.value); })
       .attr("y", d => { return y(d.value) + .1; })
       .attr("dy", "-.7em");
-  }
 
+    svg.append("text")
+      .attr("x", (width / 2))
+      .attr("y", 0 - (margin.top / 2))
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("text-decoration", "underline")
+      .text(this.xAxisLabel + " vs " + this.yAxisLabel);
+  }
 }

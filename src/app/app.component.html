@@ -1,20 +1,28 @@
-<!-- <div class="tableWrapper">
-  <div class="tableHeader">
-    <div class="tableRow">
-        <div class="tableCell" [style.width.%]="100/headerValues.length" *ngFor="let headerEl of headerValues">{{ headerEl }}</div>
-    </div>
-  </div>
-  <div class="tableBody">
-    <div>
-      <div class="tableRow" *ngFor="let tableRow of tableData">
-        <div class="tableCell" [style.width.%]="100/headerValues.length" *ngFor="let headerEl of headerValues">{{ tableRow[headerEl] }}</div>
-      </div>
-    </div>
-  </div>
-</div> -->
-<app-bar-chart 
-  [barChartData] = "barChartData"
-  [barColor] = "'blue'"></app-bar-chart>
-<app-line-chart 
-  [lineChartData]="lineChartData"
-  [lineColor] = "'blue'"></app-line-chart>
+<div id="barChart" class="barChart">
+  <app-bar-chart 
+    [selectorDiv] = "'barChart'"
+    [barChartData] = "barChartData"
+    [barColor] = "'blue'"
+    [yAxisLabel] = "'Population (M)'"
+    [xAxisLabel]="'Year'"></app-bar-chart>
+</div>
+<div id="lineChart" class="lineChart">
+  <app-line-chart 
+    [selectorDiv]="'lineChart'"
+    [lineChartData]="lineChartData"
+    [lineColor] = "'#ff0000'"
+    [yAxisLabel]="'Population (M)'"
+    [xAxisLabel]="'Year'"></app-line-chart>
+</div>
+<div id="pieChart" class="pieChart">
+  <app-pie-chart 
+    [pieChartData]="pieChartData"
+    ></app-pie-chart>
+</div>
+
+
+
+
+
+
+
