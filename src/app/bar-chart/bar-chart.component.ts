@@ -13,6 +13,7 @@ export class BarChartComponent implements OnInit {
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() selectorDiv: string;
+  @Input() chartTitle: string;
 
   constructor() { }
 
@@ -26,10 +27,10 @@ export class BarChartComponent implements OnInit {
     var formatPercent = d3.format(".0%");
 
     var svg = d3.select("#barChart").append("svg")
-      .attr("width", width)
+      .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + 1.1* margin.left + "," + margin.top + ")");
 
     var x = d3.scaleBand()
       .range([0, width])
@@ -114,6 +115,6 @@ export class BarChartComponent implements OnInit {
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
       .style("text-decoration", "underline")
-      .text(this.xAxisLabel + " vs " + this.yAxisLabel);
+      .text(this.chartTitle);
   }
 }

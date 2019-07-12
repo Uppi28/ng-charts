@@ -14,6 +14,7 @@ export class LineChartComponent implements OnInit {
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() selectorDiv: string;
+  @Input() chartTitle: string;
 
   constructor() { }
 
@@ -86,7 +87,7 @@ export class LineChartComponent implements OnInit {
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
       .style("text-decoration", "underline")
-      .text(this.xAxisLabel + " vs " + this.yAxisLabel);
+      .text(this.chartTitle);
       
     svg.selectAll(".dot")
       .data(dataset)

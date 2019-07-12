@@ -4,7 +4,8 @@
     [barChartData] = "barChartData"
     [barColor] = "'blue'"
     [yAxisLabel] = "'Population (M)'"
-    [xAxisLabel]="'Year'"></app-bar-chart>
+    [xAxisLabel]="'Year'"
+    [chartTitle]="'Sample Title'"></app-bar-chart>
 </div>
 <div id="lineChart" class="lineChart">
   <app-line-chart 
@@ -12,11 +13,14 @@
     [lineChartData]="lineChartData"
     [lineColor] = "'#ff0000'"
     [yAxisLabel]="'Population (M)'"
-    [xAxisLabel]="'Year'"></app-line-chart>
+    [xAxisLabel]="'Year'"
+    [chartTitle]="'Sample Title'"></app-line-chart>
 </div>
 <div id="pieChart" class="pieChart">
   <app-pie-chart 
+    [selectorDiv] = "'pieChart'"
     [pieChartData]="pieChartData"
+    [chartTitle]="'Sample Title'"
     ></app-pie-chart>
 </div>
 
