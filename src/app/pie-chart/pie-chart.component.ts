@@ -19,7 +19,7 @@ export class PieChartComponent implements OnInit {
     console.log(this.selectorDiv);
     
     const width = document.getElementById(this.selectorDiv).clientWidth;
-    const height = document.getElementById(this.selectorDiv).clientHeight;
+    const height = document.getElementById(this.selectorDiv).clientHeight - 5;
     const radius = Math.min(width, height) / 2;
 
     const svg = d3.select("#"+this.selectorDiv)

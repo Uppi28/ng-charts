@@ -20,8 +20,8 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit() {
     var margin = { top: 50, right: 50, bottom: 50, left: 50 },
-      width = document.getElementById(this.selectorDiv).clientWidth - margin.left - margin.right,
-      height = document.getElementById(this.selectorDiv).clientHeight - margin.top - margin.bottom;
+      width = document.getElementById(this.selectorDiv).clientWidth - margin.left - margin.right - 10,
+      height = document.getElementById(this.selectorDiv).clientHeight - margin.top - margin.bottom - 10;
 
     // specify ticks in this line
     var n = this.dataset.length;

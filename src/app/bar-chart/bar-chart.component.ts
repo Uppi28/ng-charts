@@ -19,8 +19,8 @@ export class BarChartComponent implements OnInit {
 
   ngOnInit() {
     var margin = { top: 40, right: 30, bottom: 30, left: 50 },
-      width = document.getElementById(this.selectorDiv).clientWidth - margin.left - margin.right,
-      height = document.getElementById(this.selectorDiv).clientHeight - margin.top - margin.bottom;
+      width = document.getElementById(this.selectorDiv).clientWidth - margin.left - margin.right - 10,
+      height = document.getElementById(this.selectorDiv).clientHeight - margin.top - margin.bottom -10;
 
     var barColor = this.barColor;
 
