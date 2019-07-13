@@ -23,7 +23,6 @@ export class LineChartComponent implements OnInit {
       width = document.getElementById(this.selectorDiv).clientWidth - margin.left - margin.right - 10,
       height = document.getElementById(this.selectorDiv).clientHeight - margin.top - margin.bottom - 10;
 
-    // specify ticks in this line
     var n = this.dataset.length;
 
     var xScale = d3.scaleLinear()

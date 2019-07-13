@@ -23,10 +23,32 @@ export class AppComponent {
   { "year": "2024", "value": .13 }];
 
   pieChartData = [
-      { "region": "North", "count": "53245"},
-      { "region": "South", "count": "28479"},
-      { "region": "East", "count": "19697"},
-      { "region": "West", "count": "24037"},
-      { "region": "Central", "count": "40245"}
-    ]
+    { "region": "North", "count": "53245"},
+    { "region": "South", "count": "28479"},
+    { "region": "East", "count": "19697"},
+    { "region": "West", "count": "24037"},
+    { "region": "Central", "count": "40245"}
+  ]
+  scatterPlotData = [
+    {var1: 10, var2: 0},
+    {var1: 20, var2: 10},
+    {var1: 30, var2: 20},
+    {var1: 40, var2: 30},
+    {var1: 50, var2: 40},
+    {var1: 60, var2: 50},
+    {var1: 70, var2: 60},
+    {var1: 80, var2: 70},
+    {var1: 90, var2: 80},
+    {var1: 100, var2: 90},
+    {var1: 90, var2: 100},
+    {var1: 80, var2: 90},
+    {var1: 70, var2: 80},
+    {var1: 60, var2: 70},
+    {var1: 50, var2: 60},
+    {var1: 40, var2: 50},
+    {var1: 30, var2: 40},
+    {var1: 20, var2: 30},
+    {var1: 10, var2: 20},
+    {var1: 0, var2: 10}
+  ];
 };

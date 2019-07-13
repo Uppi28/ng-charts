@@ -1,3 +1,4 @@
+<!-- Bar Chart -->
 <div id="barChart" class="barChart">
   <app-bar-chart 
     [selectorDiv] = "'barChart'"
@@ -5,8 +6,10 @@
     [barColor] = "'blue'"
     [yAxisLabel] = "'Population (M)'"
     [xAxisLabel]="'Year'"
-    [chartTitle]="'Sample Title'"></app-bar-chart>
+    [chartTitle]="'Sample Bar Chart'"></app-bar-chart>
 </div>
+
+<!-- Line Chart -->
 <div id="lineChart" class="lineChart">
   <app-line-chart 
     [selectorDiv]="'lineChart'"
@@ -14,18 +17,27 @@
     [lineColor] = "'#ff0000'"
     [yAxisLabel]="'Population (M)'"
     [xAxisLabel]="'Year'"
-    [chartTitle]="'Sample Title'"></app-line-chart>
+    [chartTitle]="'Sample Line Chart'"></app-line-chart>
 </div>
+
+<!-- Pie Chart -->
 <div id="pieChart" class="pieChart">
   <app-pie-chart 
     [selectorDiv] = "'pieChart'"
     [pieChartData]="pieChartData"
-    [chartTitle]="'Sample Title'"
+    [chartTitle]="'Sample Pie Chart'"
     ></app-pie-chart>
 </div>
+
+<!-- Scatter Plot -->
 <div id="scatterPlot" class="scatterPlot">
   <app-scatter-plot
-    [selectorDiv]="'scatterPlot'">
+    [selectorDiv]="'scatterPlot'"
+    [scatterPlotData]="scatterPlotData"
+    [xAxisLabel]="'Year'"
+    [yAxisLabel]="'Population (M)'"
+    [dotColor]="'#fe4b83'"
+    [chartTitle]="'Sample Scatter Plot'">
   </app-scatter-plot>
 </div>
 
