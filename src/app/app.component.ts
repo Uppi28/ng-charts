@@ -8,7 +8,36 @@ import * as d3 from 'd3';
 })
 export class AppComponent {
 
-  lineChartData = d3.range(10).map(function (d) { return { "y": d3.randomUniform(1)() } });
+  // lineChartData = d3.range(10).map(function (d) { return { "y": d3.randomUniform(1)() } });
+  lineChartData = [
+    {
+      "y": 10,
+      "x": "A"
+    },
+    {
+      "y": 20,
+      "x": "B"
+    },
+    {
+      "y": 30,
+      "x": "C"
+    },
+    {
+      "y": 40,
+      "x": "D"
+    },
+    {
+      "y": 50,
+      "x": "E"
+    }
+  ]
+
+  lineChartXAxis = Object.keys(this.lineChartData[0])[1];
+  lineChartYAxis = Object.keys(this.lineChartData[0])[0];
+
+  ngOnInit() {
+    console.log(JSON.stringify(this.lineChartData));
+  }
   
   barChartData = [{ "year": "ab14", "value": 500 },
   { "year": "ab15", "value": 0 },

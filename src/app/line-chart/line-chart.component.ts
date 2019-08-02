@@ -13,6 +13,8 @@ export class LineChartComponent implements OnInit {
   @Input() lineColor: string;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
+  @Input() xAxisColumn: string;
+  @Input() yAxisColumn: string;
   @Input() selectorDiv: string;
   @Input() chartTitle: string;
 
@@ -23,22 +25,31 @@ export class LineChartComponent implements OnInit {
       width = document.getElementById(this.selectorDiv).clientWidth - margin.left - margin.right - 10,
       height = document.getElementById(this.selectorDiv).clientHeight - margin.top - margin.bottom - 10;
 
-    var n = this.dataset.length;
-
-    var xScale = d3.scaleLinear()
-      .domain([0, n - 1])
-      .range([0, width]); 
+    var xScale = d3.scaleBand()
+      .range([0, width])
+      .domain(this.dataset.map(d => {
+        return d[this.xAxisColumn]
+      }));
       
+    var yRangeArray = this.dataset.map(d => {
+      return d[this.yAxisColumn];
+    })
     var yScale = d3.scaleLinear()
-      .domain([0, 1]) 
+      .domain([
+        Math.min(...yRangeArray), Math.max(...yRangeArray)
+      ]) 
       .range([height, 0]); 
 
+    var xAxisColumn = this.xAxisColumn;
+    var yAxisColumn = this.yAxisColumn;
     var line = d3.line()
-      .x(function (d, i) { return xScale(i); })
-      .y(function (d) { return yScale(d.y); })
+      .x(function (d, i) {
+        return xScale(d[xAxisColumn]); 
+      })
+      .y(function (d) { 
+        return yScale(d[yAxisColumn]); 
+      })
       .curve(d3.curveMonotoneX)
-
-    var dataset = this.dataset;
 
     var svg = d3.select("#lineChart").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -70,15 +81,11 @@ export class LineChartComponent implements OnInit {
       .text(this.yAxisLabel);
 
     svg.append("path")
-      .datum(dataset)
+      .datum(this.dataset)
       .attr("class", "line")
       .attr("d", line)
       .style("stroke", this.lineColor)
       .transition()
-      .duration(750)
-      .delay(function (d, i) {
-        return i * 150;
-      });
 
     svg.append("text")
       .attr("x", (width / 2))
@@ -89,11 +96,11 @@ export class LineChartComponent implements OnInit {
       .text(this.chartTitle);
       
     svg.selectAll(".dot")
-      .data(dataset)
+      .data(this.dataset)
       .enter().append("circle")
       .attr("class", "dot") 
-      .attr("cx", function (d, i) { return xScale(i) })
-      .attr("cy", function (d) { return yScale(d.y) })
+      .attr("cx", function (d, i) { return xScale(d[xAxisColumn]) })
+      .attr("cy", function (d) { return yScale(d[yAxisColumn]) })
       .attr("r", 5)
       .style("fill", this.lineColor)
       .on("mouseover", function (a) {
