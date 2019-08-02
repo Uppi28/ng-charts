@@ -10,17 +10,20 @@ export class AppComponent {
 
   lineChartData = d3.range(10).map(function (d) { return { "y": d3.randomUniform(1)() } });
   
-  barChartData = [{ "year": "2014", "value": .07 },
-  { "year": "2015", "value": .13 },
-  { "year": "2016", "value": .56 },
-  { "year": "2017", "value": .95 },
-  { "year": "2018", "value": .81 },
-  { "year": "2019", "value": .13 },
-  { "year": "2020", "value": .13 },
-  { "year": "2021", "value": .56 },
-  { "year": "2022", "value": .95 },
-  { "year": "2023", "value": .81 },
-  { "year": "2024", "value": .13 }];
+  barChartData = [{ "year": "ab14", "value": 500 },
+  { "year": "ab15", "value": 0 },
+  { "year": "ab16", "value": 300 },
+  { "year": "ab17", "value": 400 },
+  { "year": "ab18", "value": 100 },
+  { "year": "ab19", "value": 50 },
+  { "year": "abab", "value": 40 },
+  { "year": "ab21", "value": 56 },
+  { "year": "ab22", "value": 95 },
+  { "year": "ab23", "value": 81 },
+  { "year": "ab24", "value": 13 }];
+  
+  barChartXAxis = Object.keys(this.barChartData[0])[0]
+  barChartYAxis = Object.keys(this.barChartData[0])[1]
 
   pieChartData = [
     { "region": "North", "count": "53245"},

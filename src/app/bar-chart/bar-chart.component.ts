@@ -12,6 +12,8 @@ export class BarChartComponent implements OnInit {
   @Input() barColor: string;
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
+  @Input() xAxisColumn: string;
+  @Input() yAxisColumn: string;
   @Input() selectorDiv: string;
   @Input() chartTitle: string;
 
@@ -24,7 +26,7 @@ export class BarChartComponent implements OnInit {
 
     var barColor = this.barColor;
 
-    var formatPercent = d3.format(".0%");
+    // var formatPercent = d3.format(".0%");
 
     var svg = d3.select("#barChart").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -39,16 +41,20 @@ export class BarChartComponent implements OnInit {
       .range([height, 0]);
 
     var xAxis = d3.axisBottom(x).tickSize([]).tickPadding(10);
-    var yAxis = d3.axisLeft(y).tickFormat(formatPercent);
+    var yAxis = d3.axisLeft(y)
 
     var dataset = this.dataset
 
     x.domain(dataset.map(d => {
-      var key = Object.keys(d)[0];
-      return d[key]
+      return d[this.xAxisColumn]
     }));
 
-    y.domain([0, 1]);
+    const rangeArray = dataset.map(d => {
+      return d[this.yAxisColumn]
+    })
+    y.domain([
+       Math.min(...rangeArray), Math.max(...rangeArray)
+    ]);
 
     svg.append("g")
       .attr("class", "x axis")
@@ -77,10 +83,10 @@ export class BarChartComponent implements OnInit {
       .data(dataset)
       .enter().append("rect")
       .attr("class", "bar")
-      .style("display", d => { return d.value === null ? "none" : null; })
+      .style("display", d => { return d[this.yAxisLabel] === null ? "none" : null; })
       .style("fill", barColor)
       .attr("x", d => { 
-        return x(d.year); })
+        return x(d[this.xAxisColumn]); })
       .attr("width", x.bandwidth())
       .attr("y", d => { return height; })
       .attr("height", 0)
@@ -89,24 +95,24 @@ export class BarChartComponent implements OnInit {
       .delay(function (d, i) {
         return i * 150;
       })
-      .attr("y", d => { return y(d.value); })
-      .attr("height", d => { return height - y(d.value); });
+      .attr("y", d => { return y(d[this.yAxisColumn]); })
+      .attr("height", d => { return height - y(d[this.yAxisColumn]); });
 
     svg.selectAll(".label")
       .data(dataset)
       .enter()
       .append("text")
       .attr("class", "label")
-      .style("display", d => { return d.value === null ? "none" : null; })
-      .attr("x", (d => { return x(d.year) + (x.bandwidth() / 2) - 8; }))
+      .style("display", d => { return d[this.yAxisColumn] === null ? "none" : null; })
+      .attr("x", (d => { return x(d[this.xAxisColumn]) + (x.bandwidth() / 2) - 8; }))
       .style("fill", barColor)
       .attr("y", d => { return height; })
       .attr("height", 0)
       .transition()
       .duration(750)
       .delay((d, i) => { return i * 150; })
-      .text(d => { return formatPercent(d.value); })
-      .attr("y", d => { return y(d.value) + .1; })
+      .text(d => { return d[this.yAxisColumn]; })
+      .attr("y", d => { return y(d[this.yAxisColumn]) + .1; })
       .attr("dy", "-.7em");
 
     svg.append("text")
